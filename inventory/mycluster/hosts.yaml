@@ -1,0 +1,32 @@
+all:
+    hosts:
+        node1:
+            ansible_user: vagrant
+            ansible_host: 192.168.0.10
+            ansible_ssh_private_key_file: ~/.ssh/private
+            ansible_become: true
+            ip: 192.168.0.10
+            access_ip: 192.168.0.10
+        node2:
+            ansible_user: vagrant
+            ansible_host: 192.168.0.20
+            ansible_ssh_private_key_file: ~/.ssh/private
+            ansible_become: true
+            ip: 192.168.0.20
+            access_ip: 192.168.0.20
+    children:
+        kube-master:
+            hosts: 
+                node1:
+        kube-node:
+            hosts: 
+                node1:
+                node2:
+        etcd:
+            hosts:
+                node1:
+
+        k8s-cluster:
+            children:
+                kube-master:
+                kube-node:
