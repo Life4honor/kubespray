@@ -1,6 +1,9 @@
 #!/bin/bash
 
-git remote add upstream https://github.com/kubernetes-sigs/kubespray.git
+REMOTE_REPO=https://github.com/kubernetes-sigs/kubespray.git
+
+git remote add upstream $REMOTE_REPO
 git fetch upstream
 git checkout master
 git rebase upstream/master
+git remote remove upstream
